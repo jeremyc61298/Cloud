@@ -2,7 +2,7 @@
   "name": "cloud-hu",
   "version": "1.0.0",
   "description": "A simple cloud service using Typescript and Express",
-  "main": "lib/app/server.js",
+  "main": "lib/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "run:watch": "nodemon -i sessions .",
