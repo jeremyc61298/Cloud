@@ -3,10 +3,11 @@
 // Main application for Cloud-HU
 import express from "express";
 import morgan from "morgan";
+import {router as cloudRouter} from "./cloud/routes";
 
-const app = express();
+export const app = express();
 
 // Middleware and routers go here
 app.use(morgan("dev"));
 
-export { app };
+app.use(cloudRouter);
