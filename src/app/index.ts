@@ -3,11 +3,24 @@
 // Main application for Cloud-HU
 import express from "express";
 import morgan from "morgan";
+import * as handlebars from "express-handlebars";
+import * as config from "../config";
 import {router as cloudRouter} from "./cloud/routes";
+import {router as defaultResponses} from "./common";
 
 export const app = express();
 
-// Middleware and routers go here
-app.use(morgan("dev"));
+// Associate templates with handlebars files with ".hd" extension
+// TODO: Not actually sure if this is how it works with typescript
+app.engine("hb", handlebars.default({extname: ".hb"}));
+
+// Look in the 'templates' directory for templates
+app.set('views', process.cwd() + '/templates');
+
+// Logging 
+app.use(morgan(config.logType));
 
 app.use(cloudRouter);
+
+// Collection of default reponses for 404, 500, etc..
+app.use(defaultResponses);
