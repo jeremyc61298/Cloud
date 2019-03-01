@@ -4,6 +4,7 @@ import {Request, Response, NextFunction, Router} from "express";
 
 export const router = Router();
 
+// Default 404 NOT FOUND response
 router.use((req, res,) => {
     const htmlData = {
         pageTitle: "Not Found",
@@ -15,3 +16,5 @@ router.use((req, res,) => {
     res.type("text/html");
     res.render("default.hb", htmlData);
 });
+
+// TODO: Error handlers
