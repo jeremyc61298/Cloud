@@ -6,7 +6,7 @@ import morgan from "morgan";
 import * as exphbs from "express-handlebars";
 import * as config from "../config";
 import {router as cloudRouter} from "./cloud/routes";
-import {router as defaultResponses} from "./common";
+import {defaultNotFound } from "./common";
 
 export const app = express();
 
@@ -22,5 +22,4 @@ app.use(morgan(config.logType));
 
 app.use(cloudRouter);
 
-// Collection of default reponses for 404, 500, etc..
-app.use(defaultResponses);
+app.use(defaultNotFound);

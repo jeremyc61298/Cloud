@@ -2,10 +2,8 @@
 // Jeremy Campbell
 import {Request, Response, NextFunction, Router} from "express";
 
-export const router = Router();
-
 // Default 404 NOT FOUND response
-router.use((req, res,) => {
+export function defaultNotFound(req: Request, res: Response) {
     const htmlData = {
         pageTitle: "Not Found",
         bodyTitle: "Not Found - 404",
@@ -14,6 +12,6 @@ router.use((req, res,) => {
     res.status(404);
     res.type("text/html");
     res.render("default.hb", htmlData);
-});
+}
 
 // TODO: Error handlers
