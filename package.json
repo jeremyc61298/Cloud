@@ -23,6 +23,7 @@
   "homepage": "https://github.com/jeremyc61298/Cloud-HU#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "bulma": "^0.7.4",
     "express": "^4.16.4",
     "express-handlebars": "^3.0.2",
     "express-session": "^1.15.6",

@@ -20,6 +20,8 @@ app.set('views', process.cwd() + '/templates');
 // Logging 
 app.use(morgan(config.logType));
 
+app.use(express.static("./static"));
+
 app.use(cloudRouter);
 
 app.use(defaultNotFound);

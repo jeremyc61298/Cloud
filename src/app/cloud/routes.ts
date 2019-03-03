@@ -4,6 +4,7 @@
 import {Router, Request, Response, NextFunction} from "express";
 import {displayDir} from "./display-dir";
 import {displayFile} from "./display-file";
+import {uploadFile} from "./upload-file";
 import fs from "fs";
 import * as config from "../../config";
 import { promisify } from "util";
@@ -14,6 +15,7 @@ export const router = Router();
 // The "cloud" url should actually map to the user folder
 // also this shouldn't be for "any" request method
 router.use("/cloud", determineFileType);
+router.post("/", uploadFile);
 
 const statP = promisify(fs.stat);
 
