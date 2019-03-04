@@ -23,19 +23,23 @@
                         </a>
                     </label>
                 {{/each}}
-                <form>
-                    <div class="file is-centered is-info">
-                        <label class="file-label">
-                            <input class="file-input" type="file" name="userfile">
-                            <span class="file-cta">
-                                <span class="file-icon">
-                                    <i class="fas fa-upload"></i>
+                <form method="POST" enctype="multipart/form-data" action="/cloud">
+                    <div class="field is-grouped-centered">
+                        <div class="file is-centered is-info">
+                            <label class="file-label">
+                                <input class="file-input" type="file" name="userfile">
+                                <span class="file-cta">
+                                    <span class="file-icon">
+                                        <i class="fas fa-upload"></i>
+                                    </span>
+                                    <span class="file-label">
+                                        Upload to Cloud-HU
+                                    </span>
                                 </span>
-                                <span class="file-label">
-                                    Upload to Cloud-HU
-                                </span>
-                            </span>
-                        </label>
+                            </label>
+                        </div>
+                        <input type="hidden" value="{{dirName}}" name="currentDir">
+                        <input class="button is-primary" type="submit" value="Submit">
                     </div>
                 </form>
             </nav>

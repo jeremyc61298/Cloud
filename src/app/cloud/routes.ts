@@ -8,14 +8,17 @@ import {uploadFile} from "./upload-file";
 import fs from "fs";
 import * as config from "../../config";
 import { promisify } from "util";
+import multer from "multer";
 import {defaultNotFound} from "../common";
 
 export const router = Router();
+const upload = multer({dest: "./uploads/"});
 
 // The "cloud" url should actually map to the user folder
 // also this shouldn't be for "any" request method
-router.use("/cloud", determineFileType);
+router.post("/", upload.single("userfile"))
 router.post("/", uploadFile);
+router.use("/cloud", determineFileType);
 
 const statP = promisify(fs.stat);
 
