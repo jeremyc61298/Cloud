@@ -18,7 +18,7 @@ const upload = multer({dest: "./uploads/"});
 // also this shouldn't be for "any" request method
 router.post("/", upload.single("userfile"))
 router.post("/", uploadFile);
-router.use("/cloud", determineFileType);
+router.use(determineFileType);
 
 const statP = promisify(fs.stat);
 

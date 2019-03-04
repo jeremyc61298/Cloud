@@ -22,6 +22,6 @@ app.use(morgan(config.logType));
 
 app.use(express.static("./static"));
 
-app.use(cloudRouter);
+app.use("/cloud", cloudRouter);
 
 app.use(defaultNotFound);
