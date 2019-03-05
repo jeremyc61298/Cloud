@@ -38,3 +38,13 @@ export async function determineFileType(req: Request, res: Response, next: NextF
         }
     }
 }
+
+// Any request that comes the cloud feature needs to be checked for "/..", because it may 
+// map outside of the config.cloudDirectory
+export function disallowParentDirectoryRequest(req: Request, res: Response, next: NextFunction) {
+    if (req.originalUrl.includes("/..")) { 
+        notFoundInCloud(req, res);
+    } else {
+        next();
+    }
+}
