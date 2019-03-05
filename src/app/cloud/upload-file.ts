@@ -1,10 +1,11 @@
 // upload-file.ts
 // Jeremy Campbell
 // Exports a middleware function for handling user uploads to the cloud
-import {Request, Response} from "express";
 import fs from "fs";
-import {promisify} from "util";
 import * as config from "../../config";
+import {ServerError} from "../common";
+import {Request, Response, NextFunction} from "express";
+import {promisify} from "util";
 
 const renameAsync = promisify(fs.rename);
 
@@ -16,20 +17,20 @@ function transformCurrentDirectory(frontEndView: string): string {
     return "." + frontEndView.replace(config.cloudDirectoryUserView, config.cloudDirectory);
 }
 
-// Need to current directory. Use an interface for req.body 
-export async function uploadFile(req: Request, res: Response) {
+export async function uploadFile(req: Request, res: Response, next: NextFunction) {
     let uploadBody = req.body as UploadRequestBody;
     if (uploadBody.currentDir) {
-        const backEndView = transformCurrentDirectory(uploadBody.currentDir);
-        fs.rename(req.file.path, backEndView + req.file.originalname, (err) => {
-            if (err) {
+        // This (req.file) should always be true because of the "required" attribute on the file input
+        if (req.file) {
+            const backEndView = transformCurrentDirectory(uploadBody.currentDir);
+            try {
+                await renameAsync(req.file.path, backEndView + req.file.originalname);
+            } catch (err) {
                 console.log(err);
-            } else {
-                console.log("File moved");
             }
-        });
+        }
         res.redirect(303, uploadBody.currentDir);
     } else {
-        res.send("problem");
+        next(new ServerError("Problem uploading file from the user"));
     }
 }
