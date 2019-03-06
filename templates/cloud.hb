@@ -16,50 +16,52 @@
     </script>
 </head>
 <body>
-    <div class="columns is-centered">
-        <div class="column is-three-fifths">
-            <nav class="panel">
-                <p class= "panel-heading">{{dirName}}</p>
-                {{#each files}}
-                    <label class="panel-block">
-                        <a href="{{downloadPath}}">
-                            <figure class="image is-24x24">
-                                <img src="{{imgPath}}" alt="">
-                            </figure>
-                        </a>
-                        <a href="{{path}}">
-                            {{name}}
-                        </a>
-                    </label>
-                {{/each}}
-                <form method="POST" enctype="multipart/form-data" action="/cloud">
-                    <div class="field is-grouped-centered">
-                        <div class="file is-centered is-info has-name">
-                            <label class="file-label">
-                                <div class="control is-expanded">
-                                    <input class="file-input" type="file" id="userfile" name="userfile" required>
-                                </div>
-                                <span class="file-cta">
-                                    <span class="file-icon">
-                                        <i class="fas fa-upload"></i>
+    <section class="section">
+        <div class="columns is-centered">
+            <div class="column is-three-fifths">
+                <nav class="panel">
+                    <p class= "panel-heading">{{dirName}}</p>
+                    {{#each files}}
+                        <label class="panel-block">
+                            <a href="{{downloadPath}}">
+                                <figure class="image is-24x24">
+                                    <img src="{{imgPath}}" alt="">
+                                </figure>
+                            </a>
+                            <a href="{{path}}">
+                                {{name}}
+                            </a>
+                        </label>
+                    {{/each}}
+                    <form method="POST" enctype="multipart/form-data" action="/cloud">
+                        <div class="field is-grouped-centered">
+                            <div class="file is-centered is-info has-name">
+                                <label class="file-label">
+                                    <div class="control is-expanded">
+                                        <input class="file-input" type="file" id="userfile" name="userfile" required>
+                                    </div>
+                                    <span class="file-cta">
+                                        <span class="file-icon">
+                                            <i class="fas fa-upload"></i>
+                                        </span>
+                                        <span class="file-label">
+                                            Upload to Cloud-HU
+                                        </span>
                                     </span>
-                                    <span class="file-label">
-                                        Upload to Cloud-HU
+                                    <span class="file-name" id="filename">
+                                        Select a file
                                     </span>
-                                </span>
-                                <span class="file-name" id="filename">
-                                    Select a file
-                                </span>
-                            </label>
+                                </label>
+                            </div>
+                            <div class="control">
+                                <input class="button is-primary" type="submit" name="submitUpload" value="Submit">
+                            </div>
+                            <input type="hidden" value="{{dirName}}" name="currentDir">
                         </div>
-                        <div class="control">
-                            <input class="button is-primary" type="submit" name="submitUpload" value="Submit">
-                        </div>
-                        <input type="hidden" value="{{dirName}}" name="currentDir">
-                    </div>
-                </form>
-            </nav>
+                    </form>
+                </nav>
+            </div>
         </div>
-    </div>
+    </section>
 </body>
 </html>
