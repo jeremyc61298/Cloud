@@ -1,6 +1,6 @@
 // cloud/index.ts
 // Jeremy Campbell
-// Main feature for Cloud-HU
+// Main routing for Cloud-HU
 import {Router} from "express";
 import {uploadFile} from "./upload-file";
 import {determineFileType, disallowParentDirectoryRequest} from "./display-request"

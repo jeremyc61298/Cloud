@@ -1,5 +1,6 @@
 // app/common.ts
 // Jeremy Campbell
+// Common functions meant to be used by the app and features
 import {Request, Response, NextFunction, Router} from "express";
 
 // Default 404 NOT FOUND response
