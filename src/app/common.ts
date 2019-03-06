@@ -15,24 +15,30 @@ export function defaultNotFound(req: Request, res: Response) {
     res.render("default.hb", htmlData);
 }
 
-// 400 BAD REQUEST response
-export function badRequest(res: Response, message = "That request is not allowed") {
-    const htmlData = {
-        pageTitle: "Bad Request",
-        bodyTitle: "Bad Request - 400",
-        bodyMessage: message
+// 400 BAD REQUEST when file too big
+export function uploadTooLarge(err: ServerError, req: Request, res: Response, next: NextFunction) {
+    if (err.name == "MulterError" && err.code === "LIMIT_FILE_SIZE") {
+        const htmlData = {
+            pageTitle: "Bad Request",
+            bodyTitle: "Bad Request - 400",
+            bodyMessage: err.message
+        }
+        res.status(400);
+        res.type("text/html");
+        res.render("default.hb", htmlData);
+    } else {
+        next(err);
     }
-    res.status(400);
-    res.type("text/html");
-    res.render("default.hb", htmlData);
 }
 
 // Error type to be used for internal errors
 export class ServerError extends Error {
     message: string;
-    constructor(message: string) {
+    code: string;
+    constructor(message: string, code: string) {
         super(message);
         this.message = message;
+        this.code = code;
     }
 }
 
@@ -43,6 +49,7 @@ export function defaultInternalError(err: ServerError, req: Request, res: Respon
         bodyTitle: "Internal Error - 500",
         bodyMessage: "Oops! Something went wrong on our end. Please try again soon."
     }
+    console.log(err);
     res.status(500);
     res.type("text/html");
     res.render("default.hb", htmlData);

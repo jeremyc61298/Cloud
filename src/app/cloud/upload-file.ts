@@ -31,6 +31,6 @@ export async function uploadFile(req: Request, res: Response, next: NextFunction
         }
         res.redirect(303, uploadBody.currentDir);
     } else {
-        next(new ServerError("Problem uploading file from the user"));
+        next(new ServerError("Problem uploading file from the user", "UPLOAD_ERROR"));
     }
 }

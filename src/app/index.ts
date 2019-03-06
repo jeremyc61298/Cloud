@@ -6,7 +6,7 @@ import morgan from "morgan";
 import * as exphbs from "express-handlebars";
 import * as config from "../config";
 import {router as cloudRouter} from "./cloud/routes";
-import {defaultNotFound, defaultInternalError, badRequest} from "./common";
+import {defaultNotFound, defaultInternalError, uploadTooLarge} from "./common";
 
 export const app = express();
 
@@ -26,4 +26,5 @@ app.use("/cloud", cloudRouter);
 
 // Error handling
 app.use(defaultNotFound);
+app.use(uploadTooLarge);
 app.use(defaultInternalError);
