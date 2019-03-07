@@ -9,3 +9,5 @@ export const logType = "dev";
 export const downloadImg = "/img/download.png";
 export const dirImg = "/img/directory.png";
 export const maxUploadSize = 2000000000;
+export const uploadDestination = "./uploads/";
+export const staticDirectory = "./static";

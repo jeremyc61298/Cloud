@@ -4,7 +4,7 @@
 import {Router} from "express";
 import {uploadFile} from "./upload-file";
 import {determineFileType, disallowParentDirectoryRequest} from "./display-request"
-import {maxUploadSize} from "../../config";
+import {maxUploadSize, uploadDestination} from "../../config";
 import multer from "multer";
 
 export const router = Router();
@@ -12,7 +12,7 @@ export const router = Router();
 const limits = { fileSize: maxUploadSize};
 
 const upload = multer({
-    dest: "./uploads/",
+    dest: uploadDestination,
     limits: limits
 });
 

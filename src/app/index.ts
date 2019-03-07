@@ -20,9 +20,9 @@ app.set('views', process.cwd() + '/templates');
 // Logging 
 app.use(morgan(config.logType));
 
-app.use(express.static("./static"));
+app.use(express.static(config.staticDirectory));
 
-app.use("/cloud", cloudRouter);
+app.use(config.cloudDirectoryUserView, cloudRouter);
 
 // Error handling
 app.use(defaultNotFound);
